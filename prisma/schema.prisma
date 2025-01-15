@@ -17,7 +17,7 @@ enum Role {
 
 model User {
   id String @id @default(uuid())
-  name String
+  name String?
   email String @unique
   password String
   createdAt DateTime @default(now())
@@ -30,7 +30,7 @@ model Ficha {
   id          String    @id @default(uuid())
   title       String
   contenido   String
-  users       User    @relation(fields: [userId], references: [id])
+  users       User[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   userId      String
