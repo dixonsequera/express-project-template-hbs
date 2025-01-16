@@ -13,14 +13,13 @@ const { Pool } = require('pg');
 
 const swaggerDocs = require('./config/swagger').swaggerDocs;
 const swaggerUi = require('./config/swagger').swaggerUi;
+const helpers = require('./utils/helpers'); // <--- Línea agregada
 
-const hbs = create({
-  extname: 'hbs',
-  defaultLayout: 'main',
-  partialsDir: 'views/partials',
-  helpers: require('./utils/helpers')
-});
-
+const hbs = create({ extname: 'hbs', 
+defaultLayout: 'main', 
+partialsDir: 'views/partials', 
+helpers: helpers,
+handlebars: require('handlebars').create({ allowProtoPropertiesByDefault: true }) });//modificado para incluir fichas
 require('dotenv').config();
 
 const pool = new Pool({
@@ -28,6 +27,7 @@ const pool = new Pool({
 });
 
 const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
 const app = express();
 
@@ -67,6 +67,7 @@ require('./config/cloudinary');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use('/', indexRouter);
+app.use('/users', usersRouter); //modificado para incluir las fichas
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

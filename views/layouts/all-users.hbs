@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Users</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>All Users</h1>
+    </header>
+    <div class="users-list">
+      {{#each users}}
+        <div class="user">
+          <p><strong>ID:</strong> {{this.id}}</p>
+          <p><strong>Name:</strong> {{this.name}}</p>
+          <p><strong>Email:</strong> {{this.email}}</p>
+          <p><strong>Matricula:</strong> {{this.matricula}}</p>
+          <p><strong>Coche:</strong> {{this.coche}}</p>
+          <p><strong>Modelo:</strong> {{this.modelo}}</p>
+          <p><strong>Role:</strong> {{this.role}}</p>
+          <p><strong>Created At:</strong> {{this.createdAt}}</p>
+          <p><strong>Updated At:</strong> {{this.updatedAt}}</p>
+          {{#if this.Fichas}}
+            <h2>Fichas</h2>
+            <ul>
+              {{#each this.Fichas}}
+                <li>{{this.title}}: {{this.contenido}}</li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</body>
+</html>
