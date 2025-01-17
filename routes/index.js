@@ -15,7 +15,7 @@ router.get('/profile', (req, res) => {
 
 router.get('/', isAuthenticated, function (req, res) {
   console.log(req.session)
-  res.render('index', { title: 'Express project template' });
+  res.render('index', { title: 'Express project template',user : req.user });
 });
 
 module.exports = router;

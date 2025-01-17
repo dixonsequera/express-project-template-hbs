@@ -34,9 +34,10 @@
       </div>
     {{/if}}
 
-    {{#if (eq user.role 'ADMIN')}}
+    {{!-- {{#if (eq user.role 'ADMIN')}}
       <a href="/users"><button>View All Users</button></a>
-    {{/if}}
+    {{/if}} --}}
+    {{#eq user.role "ADMIN"}} <a href="/users"><button>View All Users</button></a>{{/eq}}
   </div>
 </body>
 </html>
