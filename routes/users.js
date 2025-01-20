@@ -43,21 +43,20 @@ router.get('/profile', async (req, res) => {
 });
 
 router.delete("/delete/:id", async (req, res) => {
+  console.log('Request method:', req.method);
   try {
-    const { id } = req.params;  // Get the user ID from the URL (PostgreSQL ID)
+    const { id } = req.params;
 
-    // If the ID is a number (e.g., integer ID), convert it, otherwise use it as a string.
-    const userId = parseInt(id, 10);  // For integer IDs, parse it
 
-    if (isNaN(userId)) {
-      // If the ID can't be converted to a valid number, handle the error
-      return res.status(400).json({ message: "Invalid user ID" });
-    }
 
-    // Find and delete the user by ID (assuming you're using Prisma with PostgreSQL)
+    // if (isNaN(id)) {
+    //   console.log(id);
+    //   return res.status(400).json({ message: "Invalid user ID" });
+    // }
+
     const deletedUser = await prisma.user.delete({
       where: {
-        id: userId,  // Use the user ID to find the user in the database
+        id,
       },
     });
 
@@ -65,8 +64,7 @@ router.delete("/delete/:id", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Redirect after successful deletion
-    res.redirect('/users'); // Redirect to users page after deletion
+    res.redirect('/users');
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error deleting user" });

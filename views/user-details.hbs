@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Details</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
-<body>
+
   <div class="container">
     <header>
       <h1>User Details</h1>
@@ -16,7 +8,7 @@
       <p><strong>Name:</strong> {{user.name}}</p>
       <p><strong>Email:</strong> {{user.email}}</p>
       <p><strong>Matricula:</strong> {{user.matricula}}</p>
-      <p><strong>Coche:</strong> {{user.coche}}</p>
+      <p><strong>Marca:</strong> {{user.marca}}</p>
       <p><strong>Modelo:</strong> {{user.modelo}}</p>
       <p><strong>Role:</strong> {{user.role}}</p>
       <p><strong>Created At:</strong> {{user.createdAt}}</p>
@@ -38,7 +30,8 @@
       <a href="/users"><button>View All Users</button></a>
     {{/if}} --}}
     {{#eq user.role "ADMIN"}} <a href="/users"><button>View All Users</button></a>{{/eq}}
+    <form action="/" method="GET">
+      <button type="submit">Go back</button>
+    </form>
   </div>
-</body>
-</html>
 

@@ -1,10 +1,13 @@
 function isAdmin(req, res, next) {
-  console.log(req.user)
-  if (req.user.role === 'ADMIN') {
-    return next();
-  }
+if (!req.isAuthenticated()) {
+    return res.status(401).json({ message: 'Authentication required' });
+}
 
-  res.redirect('/');
+if (!req.user || req.user.role !== 'ADMIN') {
+    return res.status(403).json({ message: 'Admin access required' });
+}
+
+next();
 }
 
 module.exports = isAdmin;

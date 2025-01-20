@@ -54,28 +54,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.delete("/delete", async (req, res) => {
-  try {
-    const { name } = req.body;
 
-    // Find and delete the user by name
-    const deletedUser = await prisma.user.delete({
-      where: {
-        name: name,
-      },
-    });
-
-    if (!deletedUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // Redirect after successful deletion
-    res.redirect('/'); // Replace '/somewhere' with your desired redirect URL
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Error deleting user" });
-  }
-});
 
 
 
