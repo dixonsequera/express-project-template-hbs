@@ -104,14 +104,17 @@ try {
     }
 
     const { id } = req.params;
-    const { name, email, role } = req.body;
+    const { name, email, role, matricula, marca, modelo } = req.body;
 
     const updatedUser = await prisma.user.update({
     where: { id },
     data: {
         name,
         email,
-        role
+        role,
+        matricula,
+        marca,
+        modelo
     }
     });
 

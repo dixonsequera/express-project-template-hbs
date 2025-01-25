@@ -37,7 +37,7 @@
     {{#notEq ../loggedUser.id this.id}}
         {{#eq ../../loggedUser.role "ADMIN"}}
         <div class="user-actions mt-3">
-            <form action="/users/Edit/{{../this.id}}?_method=GET" method="POST" class="d-inline-block me-2" onsubmit="return confirmEdit()">
+            <form action="/users/edit/{{../this.id}}" method="GET" class="d-inline-block me-2" onsubmit="return confirmEdit()">
             <button type="submit" class="btn btn-primary">Edit user</button>
             </form>
             <form action="/users/delete/{{../this.id}}?_method=DELETE" method="POST" class="d-inline-block" onsubmit="return confirmDelete()">
