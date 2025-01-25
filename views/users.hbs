@@ -1,39 +1,52 @@
+<div class="container">
+  <header>
+    <h1>All Users</h1>
+  </header>
+  <div class="users-list">
+    {{#each users}}
+    <div class="user">
+      <p><strong>ID:</strong> {{this.id}}</p>
+      <p><strong>Name:</strong> {{this.name}}</p>
+      <p><strong>Email:</strong> {{this.email}}</p>
+      <p><strong>Matricula:</strong> {{this.matricula}}</p>
+      <p><strong>Marca:</strong> {{this.marca}}</p>
+      <p><strong>Modelo:</strong> {{this.modelo}}</p>
+      <p><strong>Role:</strong> {{this.role}}</p>
+      <p><strong>Created At:</strong> {{this.createdAt}}</p>
+      <p><strong>Updated At:</strong> {{this.updatedAt}}</p>
+      {{#if this.Fichas}}
+      <h2>Fichas</h2>
+      <ul>
+        {{#each this.Fichas}}
+        <li>{{this.title}}: {{this.contenido}}</li>
+        {{/each}}
+      </ul>
+      {{/if}}
 
-  <div class="container">
-    <header>
-      <h1>Edit User</h1>
-    </header>
-    <form class="mb-3" action="/users/update/{{user.id}}?_method=PUT" method="POST">
-    <div class="mb-3">
-        <label for="name" class="form-label">Name:</label>
-        <input type="text" class="form-control" id="name" name="name" value="{{user.name}}" required>
+      {{#eq ../loggedUser.role "ADMIN"}}
+      <a href="/users/edit/{{this.id}}">
+        <button type="button">Edit User</button>
+      </a>
+      {{/eq}}
+
+      {{#notEq ../loggedUser.id this.id}}
+      {{#eq ../loggedUser.role "ADMIN"}}
+      <form action="/users/delete/{{this.id}}?_method=DELETE" method="POST" onsubmit="return confirmDelete()">
+        <button type="submit">Delete User</button>
+      </form>
+      <script>
+        function confirmDelete() {
+          return confirm('Are you sure you want to delete this user?');
+        }
+      </script>
+      {{/eq}}
+      {{else}}
+      <p style="color: red;">You cannot delete yourself.</p>
+      {{/notEq}}
     </div>
-
-    <div class="mb-3">
-        <label for="email" class="form-label">Email:</label>
-        <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="matricula" class="form-label">Matricula:</label>
-        <input type="text" class="form-control" id="matricula" name="matricula" value="{{user.matricula}}" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="marca" class="form-label">Marca:</label>
-        <input type="text" class="form-control" id="marca" name="marca" value="{{user.marca}}" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="modelo" class="form-label">Modelo:</label>
-        <input type="text" class="form-control" id="modelo" name="modelo" value="{{user.modelo}}" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="role" class="form-label">Role:</label>
-        <input type="text" class="form-control" id="role" name="role" value="{{user.role}}" required>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Update User</button>
-    </form>
+    {{/each}}
   </div>
+  <form action="/" method="GET">
+    <button type="submit">Go back</button>
+  </form>
+</div>

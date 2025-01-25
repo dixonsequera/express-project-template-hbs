@@ -114,7 +114,7 @@ try {
         role,
         matricula,
         marca,
-        modelo
+        modelo,
     }
     });
 
