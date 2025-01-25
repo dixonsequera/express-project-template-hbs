@@ -71,5 +71,61 @@ router.delete("/delete/:id", async (req, res) => {
   }
 });
 
+router.get("/edit/:id", async (req, res) => {
+try {
+    // Verify admin authentication
+    if (!req.user || req.user.role !== 'ADMIN') {
+    return res.status(403).send('Access denied');
+    }
+
+    const { id } = req.params;
+    
+    const user = await prisma.user.findUnique({
+    where: { id },
+    include: { Fichas: true }
+    });
+
+    if (!user) {
+    return res.status(404).send('User not found');
+    }
+
+    res.render('users', { user, loggedUser: req.user });
+} catch (error) {
+    console.error('Error fetching user for edit:', error);
+    res.status(500).send('An error occurred');
+}
+});
+
+router.put("/update/:id", async (req, res) => {
+try {
+    // Verify admin authentication
+    if (!req.user || req.user.role !== 'ADMIN') {
+    return res.status(403).send('Access denied');
+    }
+
+    const { id } = req.params;
+    const { name, email, role } = req.body;
+
+    const updatedUser = await prisma.user.update({
+    where: { id },
+    data: {
+        name,
+        email,
+        role
+    }
+    });
+
+    if (!updatedUser) {
+    return res.status(404).send('User not found');
+    }
+
+    res.redirect('/users');
+} catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).send('An error occurred while updating the user');
+}
+});
+
+module.exports = router;
 
 module.exports = router;

@@ -1,0 +1,27 @@
+
+  <div class="container">
+    <header>
+      <h1>Edit User</h1>
+    </header>
+    <form action="/users/update/{{user.id}}?_method=PUT" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" value="{{user.name}}" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="{{user.email}}" required>
+
+      <label for="matricula">Matricula:</label>
+      <input type="text" id="matricula" name="matricula" value="{{user.matricula}}" required>
+
+      <label for="marca">Marca:</label>
+      <input type="text" id="marca" name="marca" value="{{user.marca}}" required>
+
+      <label for="modelo">Modelo:</label>
+      <input type="text" id="modelo" name="modelo" value="{{user.modelo}}" required>
+
+      <label for="role">Role:</label>
+      <input type="text" id="role" name="role" value="{{user.role}}" required>
+
+      <button type="submit">Update User</button>
+    </form>
+  </div>

@@ -1,48 +1,58 @@
+<div class="container">
+<header>
+    <h1>All Users</h1>
+</header>
 
-    <div class="container">
-      <header>
-        <h1>All Users</h1>
-      </header>
-      <div class="users-list">
-        {{#each users}}
-        <div class="user">
-          <p><strong>ID:</strong> {{this.id}}</p>
-          <p><strong>Name:</strong> {{this.name}}</p>
-          <p><strong>Email:</strong> {{this.email}}</p>
-          <p><strong>Matricula:</strong> {{this.matricula}}</p>
-          <p><strong>Marca:</strong> {{this.marca}}</p>
-          <p><strong>Modelo:</strong> {{this.modelo}}</p>
-          <p><strong>Role:</strong> {{this.role}}</p>
-          <p><strong>Created At:</strong> {{this.createdAt}}</p>
-          <p><strong>Updated At:</strong> {{this.updatedAt}}</p>
-          {{#if this.Fichas}}
-          <h2>Fichas</h2>
-          <ul>
-            {{#each this.Fichas}}s
-            <li>{{this.title}}: {{this.contenido}}</li>
-            {{/each}}
-          </ul>
-          {{/if}}
-         {{!-- <p style="color: red;">{{this.id}}</p> --}}
-          {{#notEq ../loggedUser.id this.id}}
-            {{#eq ../../loggedUser.role "ADMIN"}}
-              <form action="/users/delete/{{../this.id}}?_method=DELETE" method="POST" onsubmit="return confirmDelete()">
-                <button type="submit">Delete user</button>
-              </form>
+<script>
+    function confirmEdit() {
+    return confirm('Are you sure you want to edit this user?');
+    }
+    function confirmDelete() {
+    return confirm('Are you sure you want to delete this user?');
+    }
+</script>
 
-              <script>
-                function confirmDelete() {
-                  return confirm('Are you sure you want to delete this user?');
-                }
-              </script>
-            {{/eq}}
-          {{else}}
-           <p style="color: red;">You can not delete yourself.</p>
-          {{/notEq}}
-        </div>
+<div class="users-list">
+    {{#each users}}
+    <div class="user card mb-3 p-3">
+    <p><strong>ID:</strong> {{this.id}}</p>
+    <p><strong>Name:</strong> {{this.name}}</p>
+    <p><strong>Email:</strong> {{this.email}}</p>
+    <p><strong>Matricula:</strong> {{this.matricula}}</p>
+    <p><strong>Coche:</strong> {{this.coche}}</p>
+    <p><strong>Modelo:</strong> {{this.modelo}}</p>
+    <p><strong>Role:</strong> {{this.role}}</p>
+    <p><strong>Created At:</strong> {{this.createdAt}}</p>
+    <p><strong>Updated At:</strong> {{this.updatedAt}}</p>
+
+    {{#if this.Fichas}}
+    <h2>Fichas</h2>
+    <ul>
+        {{#each this.Fichas}}
+        <li>{{this.title}}: {{this.contenido}}</li>
         {{/each}}
-      </div>
-        <form action="/" method="GET">
-          <button type="submit">Go back</button>
-        </form>
+    </ul>
+    {{/if}}
+
+    {{#notEq ../loggedUser.id this.id}}
+        {{#eq ../../loggedUser.role "ADMIN"}}
+        <div class="user-actions mt-3">
+            <form action="/users/Edit/{{../this.id}}?_method=GET" method="POST" class="d-inline-block me-2" onsubmit="return confirmEdit()">
+            <button type="submit" class="btn btn-primary">Edit user</button>
+            </form>
+            <form action="/users/delete/{{../this.id}}?_method=DELETE" method="POST" class="d-inline-block" onsubmit="return confirmDelete()">
+            <button type="submit" class="btn btn-danger">Delete user</button>
+            </form>
+        </div>
+        {{/eq}}
+    {{else}}
+        <p class="text-danger">You cannot modify your own account.</p>
+    {{/notEq}}
     </div>
+    {{/each}}
+</div>
+
+<form action="/" method="GET">
+    <button type="submit" class="btn btn-secondary">Go back</button>
+</form>
+</div>
