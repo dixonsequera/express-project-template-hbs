@@ -3,25 +3,37 @@
     <header>
       <h1>Edit User</h1>
     </header>
-    <form action="/users/update/{{user.id}}?_method=PUT" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" value="{{user.name}}" required>
+    <form class="mb-3" action="/users/update/{{user.id}}?_method=PUT" method="POST">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{user.name}}" required>
+    </div>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" value="{{user.email}}" required>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" required>
+    </div>
 
-      <label for="matricula">Matricula:</label>
-      <input type="text" id="matricula" name="matricula" value="{{user.matricula}}" required>
+    <div class="mb-3">
+        <label for="matricula" class="form-label">Matricula:</label>
+        <input type="text" class="form-control" id="matricula" name="matricula" value="{{user.matricula}}" required>
+    </div>
 
-      <label for="marca">Marca:</label>
-      <input type="text" id="marca" name="marca" value="{{user.marca}}" required>
+    <div class="mb-3">
+        <label for="marca" class="form-label">Marca:</label>
+        <input type="text" class="form-control" id="marca" name="marca" value="{{user.marca}}" required>
+    </div>
 
-      <label for="modelo">Modelo:</label>
-      <input type="text" id="modelo" name="modelo" value="{{user.modelo}}" required>
+    <div class="mb-3">
+        <label for="modelo" class="form-label">Modelo:</label>
+        <input type="text" class="form-control" id="modelo" name="modelo" value="{{user.modelo}}" required>
+    </div>
 
-      <label for="role">Role:</label>
-      <input type="text" id="role" name="role" value="{{user.role}}" required>
+    <div class="mb-3">
+        <label for="role" class="form-label">Role:</label>
+        <input type="text" class="form-control" id="role" name="role" value="{{user.role}}" required>
+    </div>
 
-      <button type="submit">Update User</button>
+    <button type="submit" class="btn btn-primary">Update User</button>
     </form>
   </div>

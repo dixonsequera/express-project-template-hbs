@@ -89,7 +89,7 @@ try {
     return res.status(404).send('User not found');
     }
 
-    res.render('users', { user, loggedUser: req.user });
+    res.render('edit-user', { user, loggedUser: req.user });
 } catch (error) {
     console.error('Error fetching user for edit:', error);
     res.status(500).send('An error occurred');
@@ -128,7 +128,5 @@ try {
     res.status(500).send('An error occurred while updating the user');
 }
 });
-
-module.exports = router;
 
 module.exports = router;
